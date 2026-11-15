@@ -3,7 +3,7 @@ from PIL import Image, ImageFilter
 S,R=sys.argv[1:3]; E=f'{S}/eq'
 base=Image.open(f'{R}/karusel_visual_lab/01_text.png').convert('RGB'); W,H=base.size
 items=[('lens_pink',40,30,None,330,-12),('ic_camera',455,110,150,None,4),('lens_black',700,40,None,300,10),
-       ('stand_floor',20,950,None,380,0),('lamp',250,960,330,None,0),('ic_capcut',345,1170,135,None,-7),('ic_promovie',520,1185,135,None,8),('stand_table',800,950,None,380,0)]
+       ('stand_floor',20,950,None,380,0),('lamp',250,960,330,None,0),('ic_capcut',345,1170,135,None,-7),('ic_promovie',600,1185,135,None,8),('stand_table',800,950,None,380,0)]
 for n,x,y,w,h,a in items:
     im=Image.open(f'{E}/{n}.png').convert('RGBA')
     if w: im=im.resize((w,int(im.height*w/im.width)),Image.LANCZOS)
