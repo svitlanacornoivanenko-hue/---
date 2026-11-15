@@ -1,10 +1,10 @@
 import sys
-from PIL import Image, ImageDraw, ImageFont
+from PIL import Image, ImageDraw, ImageFont, ImageFilter
 R,out=sys.argv[1:3]
 W,H=1080,1350; PINK=(246,168,202); DARK=(30,26,26); GREY=(110,100,100); M=50
 def F(n,s,w):
     f=ImageFont.truetype(f'{R}/styl/fonts/{n}',s); f.set_variation_by_axes([w]); return f
-im=Image.new('RGB',(W,H),(255,255,255)); d=ImageDraw.Draw(im)
+im=Image.new('RGB',(W,H),(255,255,255)); P=Image.new('RGBA',(W,H),(0,0,0,0)); d=ImageDraw.Draw(P)
 sz=400
 while True:
     big=F('PlayfairDisplay-wght.ttf',sz,500); bb=d.textbbox((0,0),'VISUAL',font=big)
@@ -25,5 +25,8 @@ for wv in words:
     x=M
     for c in wv: d.text((x,ty),c,font=sf,fill=GREY); x+=d.textlength(c,font=sf)+sp
     ty+=40
+a=P.split()[3]
+sh=Image.new('L',(W,H),0); sh.paste(a.filter(ImageFilter.GaussianBlur(14)).point(lambda v:int(v*0.45)),(6,12))
+im=Image.composite(Image.new('RGB',(W,H),(150,95,120)),im,sh); im.paste(P,(0,0),P)
 print('size',sz)
 im.save(out,quality=95)
