@@ -58,7 +58,7 @@ y = para(d, 80, y, 'Я з невеликого селища *Компаніїв�
 y = para(d, 80, y + 18, 'Мій стиль — *простота, естетика й ніжність*.', M(32, 400), 920)
 top = y + 40; h = H - 110 - top; w = (920 - 16) // 2
 tile(c, L('9c4f9493-image.jpg'), 80, top, w, h, 0.5, 0.25)
-tile(c, L('0036fad9-image.jpg'), 80 + w + 16, top, w, h, 0.5, 0.45)
+open(f'{S}/vl/s2geom.txt','w').write(f'{80 + w + 16} {top} {w} {h}')
 d = ImageDraw.Draw(c); foot(d, 2); c.save(f'{OUT}/02.jpg', quality=95)
 
 # ---------- 3 start ----------
@@ -122,8 +122,8 @@ def text_circle(t, r, fill, col):
         dd.text((r - dd.textlength(l, font=f) / 2, yy), l, font=f, fill=col); yy += lh
     return im
 spots = [(270, 650, 150), (640, 610, 120), (880, 760, 115), (450, 900, 130), (760, 1020, 120), (220, 1060, 110), (560, 1170, 85)]
-items = [text_circle('JOIA\nvegan', 150, LPINK, WHITE)] + \
-        [Image.open(f'{U}/{n}').convert('RGB').crop(b) for n, b in logos] + [text_circle('Gémely', 85, DARK, WHITE)]
+items = [Image.open(f'{U}/2f8da7c7-image.jpg').convert('RGB').crop((222, 40, 1068, 886))] + \
+        [Image.open(f'{U}/{n}').convert('RGB').crop(b) for n, b in logos] + [Image.open(f'{U}/d3f413c1-image.jpg').convert('RGB').crop((222, 44, 1068, 890))]
 for (cx, cy, r), im in zip(spots, items): c = circle(c, im, cx, cy, r)
 d = ImageDraw.Draw(c); foot(d, 7); c.save(f'{OUT}/07.jpg', quality=95)
 
