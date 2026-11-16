@@ -48,7 +48,7 @@ while True:
     sz -= 2
 d.text((80 - bb[0], 225 - bb[1]), 'ЗНАЙОМИТИСЬ', font=big, fill=LPINK)
 y0 = 225 + (bb[3] - bb[1]) + 40
-tile(c, Image.open(f'{U}/30c4616a-image.jpg').convert('RGB'), 80, y0, 920, H - 110 - y0, 0.5, 0.22)
+tile(c, Image.open(f'{U}/d41483be-image.jpg').convert('RGB'), 80, y0, 920, H - 110 - y0, 0.5, 0.18)
 d = ImageDraw.Draw(c); foot(d, 1); c.save(f'{OUT}/01.jpg', quality=95)
 
 # ---------- 2 who ----------
