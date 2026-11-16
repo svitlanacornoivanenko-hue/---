@@ -3,12 +3,14 @@ S,R=sys.argv[1:3]
 src=open(f'{S}/spiv2.py').read().split('# 1 mirror')[0]
 exec(src)
 OUT=f'{R}/stories/znaiomstvo'
-def two(im,y,b1,b2,emo=None,shade=0,cx=70,mw=940):
+def two(im,y,b1,b2,emo=None,shade=0,cx=70,mw=940,big=False):
     global REG
     def draw(base):
-        global REG
-        out,y0=tx(base,y,b1,'',cx=cx,mw=mw,align='l',shade=0)
-        _R=REG; REG=F(40,400)
+        global REG, BOLD
+        _B=BOLD
+        if big: BOLD=F(60,700)
+        out,y0=tx(base,y,b1,'',cx=cx,mw=mw,align='l',shade=0); BOLD=_B
+        _R=REG; REG=F(48 if big else 40,400)
         out,yb=tx(out,y0+6,'',b2,emo,cx=cx,mw=mw,align='l',shade=0); REG=_R; return out,yb
     if shade:
         _,yb=draw(im.copy())
@@ -17,7 +19,7 @@ def two(im,y,b1,b2,emo=None,shade=0,cx=70,mw=940):
     return draw(im)
 def box(im,y0,y1,label='місце для стікера'):
     d=ImageDraw.Draw(im); return im
-im,y=two(fit(f'{U}/09383c56-image.jpg'),200,'Давно хотіла це зробити…','і нарешті підготувала для вас *допис-знайомство*','🤍',shade=120); print(1,y); im.save(f'{OUT}/1.jpg',quality=94)
-im,y=two(fit(f'{U}/389c5704-image.jpg'),200,'Невеличкий тест для вас:','як думаєте, скільки процедур я зробила *за останній рік*?','🤔',shade=130); print(2,y); im.save(f'{OUT}/2.jpg',quality=94)
+im,y=two(fit(f'{U}/09383c56-image.jpg'),330,'Давно хотіла це зробити…','і нарешті підготувала для вас *допис-знайомство*','🤍',shade=120,big=True); print(1,y); im.save(f'{OUT}/1.jpg',quality=94)
+im,y=two(zoom(f'{U}/10b2af08-image.jpg',1.3,0.45,0.9),200,'Невеличкий тест для вас:','як думаєте, скільки процедур я зробила *за останній рік*?','🤔',shade=130); print(2,y); im.save(f'{OUT}/2.jpg',quality=94)
 im,y=two(fit(f'{U}/6795168f-image.jpg'),180,'А тепер вгадайте:','який із цих фактів про мене *неправда*?','👀',shade=110,mw=560); print(3,y); im.save(f'{OUT}/3.jpg',quality=94)
 im,y=two(fit(f'{U}/6d45aa50-image.jpg'),200,'Правильні відповіді','і ще багато цікавого про мене — у *новому дописі*','👇',shade=140); print(4,y); im.save(f'{OUT}/4.jpg',quality=94)
