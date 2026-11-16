@@ -110,7 +110,7 @@ d = ImageDraw.Draw(c); foot(d, 6); c.save(f'{OUT}/06.jpg', quality=95)
 # ---------- 7 brands ----------
 c = Image.new('RGB', (W, H), BG); d = ImageDraw.Draw(c)
 y = hdr(d, 'Бренди,', 'З ЯКИМИ Я ПРАЦЮЮ')
-y = para(d, 80, y, 'Понад 10 співпраць за пів року. А для *JOIA vegan* я амбасадор.', M(32, 400), 920)
+y = para(d, 80, y, 'Понад 10 співпраць за пів року. А в *JOIA vegan* я амбасадор.', M(32, 400), 920)
 logos = [('74570f89-image.jpg', (20, 16, 867, 863)), ('38c881cc-image.jpg', (22, 3, 872, 853)),
          ('0f12cf60-image.jpg', (38, 22, 886, 870)), ('b59c2ad7-image.jpg', (30, 37, 880, 887)),
          ('11b18be4-image.jpg', (50, 15, 902, 867))]
@@ -121,9 +121,9 @@ def text_circle(t, r, fill, col):
     for l in lines:
         dd.text((r - dd.textlength(l, font=f) / 2, yy), l, font=f, fill=col); yy += lh
     return im
-spots = [(270, 650, 150), (640, 610, 120), (880, 760, 115), (450, 900, 130), (760, 1020, 120), (220, 1060, 110), (560, 1170, 85)]
+spots = [(250, 640, 135), (590, 600, 110), (870, 700, 115), (420, 860, 120), (740, 900, 110), (190, 1000, 105), (560, 1110, 95), (850, 1120, 105), (330, 1180, 85)]
 items = [Image.open(f'{U}/2f8da7c7-image.jpg').convert('RGB').crop((222, 40, 1068, 886))] + \
-        [Image.open(f'{U}/{n}').convert('RGB').crop(b) for n, b in logos] + [Image.open(f'{U}/d3f413c1-image.jpg').convert('RGB').crop((222, 44, 1068, 890))]
+        [Image.open(f'{U}/{n}').convert('RGB').crop(b) for n, b in logos] + [Image.open(f'{U}/d3f413c1-image.jpg').convert('RGB').crop((222, 44, 1068, 890)), Image.open(f'{U}/02debf74-image.jpg').convert('RGB').crop((232, 54, 1058, 880)), Image.open(f'{U}/331da466-image.jpg').convert('RGB').crop((232, 67, 1058, 893))]
 for (cx, cy, r), im in zip(spots, items): c = circle(c, im, cx, cy, r)
 d = ImageDraw.Draw(c); foot(d, 7); c.save(f'{OUT}/07.jpg', quality=95)
 
