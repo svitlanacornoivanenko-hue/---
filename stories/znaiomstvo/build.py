@@ -21,5 +21,5 @@ def box(im,y0,y1,label='місце для стікера'):
     d=ImageDraw.Draw(im); return im
 im,y=two(fit(f'{U}/09383c56-image.jpg'),330,'Давно хотіла це зробити…','і нарешті підготувала для вас *допис-знайомство*','🤍',shade=120,big=True); print(1,y); im.save(f'{OUT}/1.jpg',quality=94)
 im,y=two(zoom(f'{U}/10b2af08-image.jpg',1.3,0.45,0.9),200,'Невеличкий тест для вас:','як думаєте, скільки процедур я зробила *за останній рік*?','🤔',shade=130); print(2,y); im.save(f'{OUT}/2.jpg',quality=94)
-im,y=two(fit(f'{U}/6795168f-image.jpg'),180,'А тепер вгадайте:','який із цих фактів про мене *неправда*?','👀',shade=110,mw=560); print(3,y); im.save(f'{OUT}/3.jpg',quality=94)
+im,y=two(fit(f'{U}/6795168f-image.jpg'),330,'А тепер вгадайте:','який із цих фактів про мене *неправда*?','👀',shade=110,mw=560); print(3,y); im.save(f'{OUT}/3.jpg',quality=94)
 im,y=two(fit(f'{U}/6d45aa50-image.jpg'),200,'Правильні відповіді','і ще багато цікавого про мене — у *новому дописі*','👇',shade=140); print(4,y); im.save(f'{OUT}/4.jpg',quality=94)
