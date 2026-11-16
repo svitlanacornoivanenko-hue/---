@@ -12,13 +12,13 @@ def center(t,f,y,fill,sp=0):
     tw=sum(d.textlength(c,font=f) for c in t)+sp*(len(t)-1); x=(W-tw)/2
     for c in t: d.text((x,y),c,font=f,fill=fill); x+=d.textlength(c,font=f)+sp
 y=640
-center('давай',F('PlayfairDisplay-Italic%5Bwght%5D.ttf',78,500),y,WHITE)
-sz=220
+center('ДАВАЙ',F('PlayfairDisplay-wght.ttf',62,500),y+10,WHITE,8)
+sz=260
 while True:
-    big=F('PlayfairDisplay-wght.ttf',sz,500); bb=d.textbbox((0,0),'ЗНАЙОМИТИСЬ',font=big)
+    big=F('PlayfairDisplay-Italic%5Bwght%5D.ttf',sz,500); bb=d.textbbox((0,0),'знайомитись',font=big)
     if bb[2]-bb[0]<=W-70: break
     sz-=2
-yb=y+105; d.text(((W-(bb[2]-bb[0]))/2-bb[0],yb-bb[1]),'ЗНАЙОМИТИСЬ',font=big,fill=LPINK)
+yb=y+105; d.text(((W-(bb[2]-bb[0]))/2-bb[0],yb-bb[1]),'знайомитись',font=big,fill=LPINK)
 ys=yb+(bb[3]-bb[1])+50
 sf=F('Montserrat%5Bwght%5D.ttf',26,500)
 center('СВІТЛАНА ЧОРНОІВАНЕНКО',sf,ys,WHITE,6)
