@@ -84,8 +84,8 @@ d = ImageDraw.Draw(c); foot(d, 4); c.save(f'{OUT}/04.jpg', quality=95)
 
 # ---------- 5 instagram ----------
 c = Image.new('RGB', (W, H), BG); d = ImageDraw.Draw(c)
-y = hdr(d, 'Після декрету', 'Я ЗРОЗУМІЛА: ПОТРІБЕН INSTAGRAM')
-y = para(d, 80, y, 'У 2021 я почала вести сторінку, щоб показувати роботи й знаходити клієнток. А згодом знайшла *ще одну себе* — зйомку.', M(32, 400), 920)
+y = hdr(d, 'Після декрету', 'Я ВЗЯЛАСЯ ЗА INSTAGRAM')
+y = para(d, 80, y, 'У 2021 я почала серйозно займатися сторінкою, щоб показувати роботи й знаходити клієнток. А згодом знайшла *ще одну себе* — зйомку.', M(32, 400), 920)
 top = y + 70; h = H - 110 - top; w = (920 - 16) // 2
 tile(c, Image.open(f'{U}/dd783c7c-image.jpg').convert('RGB'), 80, top, w, h, 0.5, 0.5)
 tile(c, Image.open(f'{OUT}/grid26_clean.jpg').convert('RGB'), 80 + w + 16, top, w, h, 0.5, 0.0)
