@@ -57,7 +57,7 @@ y = hdr(d, 'Я Світлана', 'МАЙСТЕР МАНІКЮРУ З 2016 РО�
 y = para(d, 80, y, 'Я з невеликого селища *Компаніївка* на Кіровоградщині. Майже 10 років роблю манікюр, а останні роки — ще й контент для nail-брендів.', M(32, 400), 920)
 y = para(d, 80, y + 18, 'Мій стиль — *простота, естетика й ніжність*.', M(32, 400), 920)
 top = y + 40; h = H - 110 - top; w = (920 - 16) // 2
-tile(c, L('9c4f9493-image.jpg'), 80, top, w, h, 0.5, 0.25)
+tile(c, L('9c4f9493-image.jpg'), 80, top, w, h, 0.5, 0.3, 1.55)
 open(f'{S}/vl/s2geom.txt','w').write(f'{80 + w + 16} {top} {w} {h}')
 d = ImageDraw.Draw(c); foot(d, 2); c.save(f'{OUT}/02.jpg', quality=95)
 
@@ -74,11 +74,12 @@ foot(d, 3); c.save(f'{OUT}/03.jpg', quality=95)
 # ---------- 4 2018 ----------
 c = Image.new('RGB', (W, H), BG); d = ImageDraw.Draw(c)
 y = hdr(d, '2018 рік', 'ТАК Я ЗНІМАЛА ТОДІ')
-y = para(d, 80, y, 'Чорний фон, пряме світло з лампи і водяний знак на пів фото. Тоді мені здавалося, що це *ідеально*.', M(32, 400), 920)
-top = y + 40; h = H - 110 - top; w = (920 - 32) // 3
-ims = [crop_ratio('4c0577d0-image.jpg', 0, 0, 1, 0.775), crop_ratio('f163f9f0-image.jpg', 0, 0, 1, 0.755),
-       crop_ratio('827a9d14-image.jpg', 0, 0, 1, 0.595)]
-for i, im in enumerate(ims): tile(c, im, 80 + i * (w + 16), top, w, h, 0.5, 0.5)
+y = para(d, 80, y, 'Пересвічений фон, пряме світло лампи і водяний знак на пів фото. Тоді мені здавалося, що це *ідеально*.', M(32, 400), 920)
+top = y + 40; gh = H - 110 - top; w = (920 - 16) // 2; h = (gh - 16) // 2
+g18 = Image.open(f'{U}/18bbcff8-image.png').convert('RGB').crop((0, 490, 425, 1050))
+ims = [(crop_ratio('4c0577d0-image.jpg', 0, 0, 1, 0.775), 0.45, 0.45, 1.25), (crop_ratio('f163f9f0-image.jpg', 0, 0, 1, 0.755), 0.55, 0.45, 1.2),
+       (crop_ratio('827a9d14-image.jpg', 0, 0, 1, 0.595), 0.5, 0.45, 1.15), (g18, 0.5, 0.5, 1.0)]
+for i, (im, fx, fy, z) in enumerate(ims): tile(c, im, 80 + (i % 2) * (w + 16), top + (i // 2) * (h + 16), w, h, fx, fy, z)
 d = ImageDraw.Draw(c); foot(d, 4); c.save(f'{OUT}/04.jpg', quality=95)
 
 # ---------- 5 instagram ----------
@@ -95,7 +96,7 @@ foot(d, 5); c.save(f'{OUT}/05.jpg', quality=95)
 c = Image.new('RGB', (W, H), BG); d = ImageDraw.Draw(c)
 y = hdr(d, 'У цифрах', 'МІЙ ШЛЯХ')
 nums = [('майже 10', 'років у манікюрі'), ('1220', 'процедур за рік'),
-        ('50 000+', 'гривень вкладено в навчання'), ('10+', 'співпраць з брендами за пів року')]
+        ('50 000+', 'грн у навчання *лише за останній рік*'), ('10+', 'співпраць з брендами *лише за пів року*')]
 cw = 452; ch = 250
 for i, (n, t) in enumerate(nums):
     x = 80 + (i % 2) * (cw + 16); yy = y + (i // 2) * (ch + 16)
@@ -104,7 +105,8 @@ for i, (n, t) in enumerate(nums):
     d.text((x + 40, yy + 34), n, font=nf, fill=PINK)
     para(d, x + 40, yy + 160, t, M(28, 500), cw - 70, base=DARK)
 top = y + 2 * (ch + 16) + 24; h = H - 110 - top
-tile(c, L('10fe640c-image.jpg'), 80, top, 920, h, 0.5, 0.35)
+w = (920 - 32) // 3
+for i, (n, fy) in enumerate([('a9a640c0-image.jpg', 0.45), ('0036fad9-image.jpg', 0.45), ('ddf5815c-image.jpg', 0.4)]): tile(c, L(n), 80 + i * (w + 16), top, w, h, 0.5, fy)
 d = ImageDraw.Draw(c); foot(d, 6); c.save(f'{OUT}/06.jpg', quality=95)
 
 # ---------- 7 brands ----------
@@ -129,15 +131,18 @@ d = ImageDraw.Draw(c); foot(d, 7); c.save(f'{OUT}/07.jpg', quality=95)
 
 # ---------- 8 facts ----------
 c = Image.new('RGB', (W, H), BG); d = ImageDraw.Draw(c)
-y = hdr(d, '5 фактів', 'ПРО МЕНЕ')
+y = hdr(d, '6 фактів', 'ПРО МЕНЕ')
 facts = [('👬', 'Я мама *двох синів-близнюків*'),
-         ('🎬', 'Обожнюю трилери, тож завжди знаю, *що порадити* подивитися — питайте'),
+         ('🏋️', 'У вільний час ходжу *в спортзал* — так я перезавантажуюсь'),
+         ('🎬', 'Обожнюю трилери, тож завжди знаю, *що порадити* подивитися'),
          ('☕', 'П’ю лате або капучино *тільки з м’ятним сиропом*'),
-         ('🦂', 'За гороскопом я *Скорпіон*'),
-         ('🔢', 'Вірю в *магію чисел*')]
-y = bullet_list(c, d, y, facts)
-top = y + 20; h = H - 110 - top
-if h > 160: tile(c, L('301d47de-image.jpg'), 80, top, 920, h, 0.5, 0.62)
+         ('🧁', 'Люблю *випікати* — за цим процесом я відпочиваю'),
+         ('🌸', 'Мої улюблені квіти — *півонії*')]
+y = bullet_list(c, d, y - 10, facts, emo_h=40, size=29, gap=16)
+top = y + 14; h = H - 110 - top; w = (920 - 4 * 12) // 5
+for i, (n, fx, fy) in enumerate([('9492eed1-image.jpg', 0.5, 0.35), ('5588a665-image.jpg', 0.5, 0.5), ('c5beda91-image.jpg', 0.55, 0.45),
+                                ('6795168f-image.jpg', 0.6, 0.4), ('719150ba-image.jpg', 0.5, 0.4)]):
+    tile(c, Image.open(f'{U}/{n}').convert('RGB'), 80 + i * (w + 12), top, w, h, fx, fy)
 d = ImageDraw.Draw(c); foot(d, 8); c.save(f'{OUT}/08.jpg', quality=95)
 
 # ---------- 9 teach ----------
