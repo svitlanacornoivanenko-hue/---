@@ -139,8 +139,8 @@ facts = [('👬', 'Я мама *двох синів-близнюків*'),
          ('🧁', 'Люблю *випікати* — за цим процесом я відпочиваю'),
          ('🌸', 'Мої улюблені квіти — *півонії*')]
 y = bullet_list(c, d, y - 10, facts, emo_h=40, size=29, gap=16)
-top = y + 14; h = H - 110 - top; w = (920 - 4 * 12) // 5
-for i, (n, fx, fy) in enumerate([('9492eed1-image.jpg', 0.5, 0.35), ('5588a665-image.jpg', 0.5, 0.5), ('c5beda91-image.jpg', 0.55, 0.45),
+top = y + 14; h = H - 110 - top; w = (920 - 3 * 12) // 4
+for i, (n, fx, fy) in enumerate([('9492eed1-image.jpg', 0.5, 0.35), ('5588a665-image.jpg', 0.5, 0.5),
                                 ('6795168f-image.jpg', 0.6, 0.4), ('719150ba-image.jpg', 0.5, 0.4)]):
     tile(c, Image.open(f'{U}/{n}').convert('RGB'), 80 + i * (w + 12), top, w, h, fx, fy)
 d = ImageDraw.Draw(c); foot(d, 8); c.save(f'{OUT}/08.jpg', quality=95)
