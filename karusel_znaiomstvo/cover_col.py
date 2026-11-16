@@ -19,7 +19,8 @@ while True:
     if bb[2]-bb[0]<=W-70: break
     sz-=2
 yb=y+105; d.text(((W-(bb[2]-bb[0]))/2-bb[0],yb-bb[1]),'знайомитись',font=big,fill=LPINK)
-ys=yb+(bb[3]-bb[1])+50
+ly=yb+(bb[3]-bb[1])+22; bw=bb[2]-bb[0]; d.line([((W-bw)/2+20,ly),((W+bw)/2-20,ly)],fill=LPINK,width=3)
+ys=ly+40
 sf=F('Montserrat%5Bwght%5D.ttf',26,500)
 center('СВІТЛАНА ЧОРНОІВАНЕНКО',sf,ys,WHITE,6)
 center('МАЙСТЕР МАНІКЮРУ З 2016 РОКУ',sf,ys+44,WHITE,6)
