@@ -43,13 +43,12 @@ def contain_card(c, img, x, y, w, h, r=40):
 
 def header(c, d, num, names, cat):
     spaced(d, 80, 80, 'ТОП-5 ДОДАТКІВ ДЛЯ КОНТЕНТУ', M(22, 600), GREY, 5)
-    d.text((W - 80 - d.textlength(num, font=P(110)), 50), num, font=P(110), fill=LPINK)
-    x = 80; y = 140; s = 120
-    for nm in names: c = paste_icon(c, ICONS[nm], x, y, s); x += s + 22
+    x = 80; y = 150; s = 175
+    for nm in names: c = paste_icon(c, ICONS[nm], x, y, s); x += s + 26
     d = ImageDraw.Draw(c); tf = P(72 if len(names) == 1 else 60)
-    d.text((80, y + s + 18), ' + '.join(names), font=tf, fill=PINK)
-    d.text((80, y + s + 18 + int(tf.size * 1.25)), cat, font=M(32, 800), fill=DARK)
-    return c, d, y + s + 18 + int(tf.size * 1.25) + 70
+    d.text((80, y + s + 30), ' + '.join(names), font=tf, fill=PINK)
+    d.text((80, y + s + 30 + int(tf.size * 1.25)), cat, font=M(32, 800), fill=DARK)
+    return c, d, y + s + 30 + int(tf.size * 1.25) + 90
 
 def tipbox(d, x, y, w, tip):
     tf2 = M(26, 400); lines = wrap(d, tip, tf2, w - 60); th = len(lines) * 36 + 70
@@ -62,7 +61,7 @@ def phone_slide(n, num, names, cat, text, tip, shot):
     lw = 470
     yy = para(d, 80, y, text, M(30, 400), lw)
     tipbox(d, 80, yy + 30, lw, tip)
-    c, _ = contain_card(c, shot, 590, 150, 410, H - 110 - 150)
+    c, _ = contain_card(c, shot, 590, 170, 410, H - 110 - 170)
     d = ImageDraw.Draw(c); foot2(d, n); c.save(f'{OUT}/{n:02d}.jpg', quality=95)
 # ---------- 1 cover')[0])
 OUT = f'{R}/karusel_dodatky'; os.makedirs(OUT, exist_ok=True)
