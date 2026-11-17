@@ -58,10 +58,10 @@ def tipbox(d, x, y, w, tip):
 def phone_slide(n, num, names, cat, text, tip, shot):
     c = Image.new('RGB', (W, H), BG); d = ImageDraw.Draw(c)
     c, d, y = header(c, d, num, names, cat)
-    lw = 470
-    yy = para(d, 80, y, text, M(30, 400), lw)
+    lw = 420
+    yy = para(d, 80, y, text, M(28, 400), lw)
     tipbox(d, 80, yy + 30, lw, tip)
-    c, _ = contain_card(c, shot, 590, 170, 410, H - 110 - 170)
+    c, _ = contain_card(c, shot, 525, 120, 515, H - 95 - 120)
     d = ImageDraw.Draw(c); foot2(d, n); c.save(f'{OUT}/{n:02d}.jpg', quality=95)
 # ---------- 1 cover')[0])
 OUT = f'{R}/karusel_dodatky'; os.makedirs(OUT, exist_ok=True)
@@ -151,9 +151,10 @@ before = Image.open(f'{U}/5366bc74-image.jpg').convert('RGB'); after = Image.ope
 c = Image.new('RGB', (W, H), BG); d = ImageDraw.Draw(c)
 c, d, y = header(c, d, '03', ['Snapseed', 'Lightroom'], 'ОБРОБКА ФОТО')
 y = para(d, 80, y, 'У *Snapseed* наближаю фото й прибираю пилинки та ворсинки «Точковою корекцією». У *Lightroom* накладаю пресет, щоб сторінка була в одному стилі. В обох роблю кольорокорекцію.', M(29, 400), 920)
-top = y + 30; h = H - 110 - top; w = (920 - 30) // 2
+top = y + 24; h = H - 92 - top; w = (980 - 20) // 2
 for i, (im, t) in enumerate([(before, 'до'), (after, 'після')]):
-    c, (px, py, iw, ih) = contain_card(c, im, 80 + i * (w + 30), top, w, h, r=24)
+    px, py, iw, ih = 50 + i * (w + 20), top, w, h
+    tile(c, im, px, py, iw, ih, 0.5, 0.42, 1.0)
     d = ImageDraw.Draw(c); f = P(38); tw = d.textlength(t, font=f)
     d.rounded_rectangle((px + 16, py + 16, px + 16 + tw + 36, py + 72), radius=14, fill=(255, 255, 255)); d.text((px + 34, py + 18), t, font=f, fill=PINK)
 foot2(d, 4); c.save(f'{OUT}/04.jpg', quality=95)
@@ -166,7 +167,7 @@ d.text((78, 105), 'Зберігай', font=P(110), fill=PINK)
 d.text((80, 270), 'ЩОБ НЕ ЗАГУБИТИ', font=M(52, 800), fill=DARK)
 d.text((80, 345), 'і повертайся до цих додатків, коли знімаєш контент', font=M(30, 400), fill=GREY)
 # post card
-pw = 560; ph = int(pw * 1350 / 1080); px = (W - pw) // 2; py = 440
+pw = 640; ph = int(pw * 1350 / 1080); px = (W - pw) // 2 - 40; py = 410
 bar = 70
 sh = Image.new('L', (W, H), 0); ImageDraw.Draw(sh).rounded_rectangle((px, py + 14, px + pw, py + ph + bar + 14), radius=28, fill=120); sh = sh.filter(ImageFilter.GaussianBlur(24))
 c = Image.composite(Image.new('RGB', (W, H), (120, 90, 105)), c, sh)
