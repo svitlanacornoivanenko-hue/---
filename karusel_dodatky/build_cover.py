@@ -11,12 +11,10 @@ d.text((74,y+175),'ДОДАТКІВ ДЛЯ КОНТЕНТУ',font=M(40,800),fill
 sh=L.split()[3].filter(ImageFilter.GaussianBlur(12)).point(lambda v:int(v*0.55))
 c=Image.composite(Image.new('RGB',(W,H),(0,0,0)),c,sh); c.paste(L,(0,0),L)
 def st(c,ic,x,y,s,a):
-    im=ic.resize((s,s),Image.LANCZOS); b=Image.new('RGBA',(s+20,s+20),(0,0,0,0)); m=Image.new('L',(s+20,s+20),0)
-    ImageDraw.Draw(m).rounded_rectangle((0,0,s+19,s+19),radius=int(s*0.27),fill=255); b.paste(Image.new('RGBA',(s+20,s+20),(255,255,255,255)),(0,0),m); b.alpha_composite(im,(10,10))
-    b=b.rotate(a,expand=True,resample=Image.BICUBIC)
-    sh=Image.new('L',(W,H),0); sh.paste(b.split()[3],(x+6,y+14)); sh=sh.filter(ImageFilter.GaussianBlur(16)).point(lambda v:int(v*0.4))
-    c=Image.composite(Image.new('RGB',(W,H),(60,50,55)),c,sh); c.paste(b,(x,y),b); return c
-for nm,x,y,s,a in [('ProMovie',850,40,150,8),('CapCut',60,1030,140,-8),('Snapseed',250,1150,125,6),('Lightroom',60,620,130,7),('TikTok',820,1080,135,-6)]:
+    b=ic.resize((s,s),Image.LANCZOS).rotate(a,expand=True,resample=Image.BICUBIC)
+    sh=Image.new('L',(W,H),0); sh.paste(b.split()[3],(x+6,y+14)); sh=sh.filter(ImageFilter.GaussianBlur(16)).point(lambda v:int(v*0.45))
+    c=Image.composite(Image.new('RGB',(W,H),(30,25,28)),c,sh); c.paste(b,(x,y),b); return c
+for nm,x,y,s,a in [('ProMovie',830,30,185,8),('CapCut',40,1000,175,-8),('Snapseed',240,1120,160,6),('Lightroom',40,600,165,7),('TikTok',820,1040,170,-6)]:
     c=st(c,ICONS[nm],x,y,s,a)
 d=ImageDraw.Draw(c); t='зберігай, щоб не загубити'; f=M(30,600); tw=d.textlength(t,font=f)
 px,py=520,1240; d.rounded_rectangle((px,py,px+tw+110,py+74),radius=37,fill=PINK); d.text((px+32,py+18),t,font=f,fill=WHITE)
