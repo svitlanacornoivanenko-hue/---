@@ -7,12 +7,12 @@ src=np.float32([[584,962],[1000,926],[1308,1592],[840,1700]]); dstf=np.float32([
 M=cv2.getPerspectiveTransform(src,dstf); flat=cv2.cvtColor(cv2.warpPerspective(bg,M,(FW,FH)),cv2.COLOR_BGR2RGB)
 orig=Image.fromarray(flat); new=orig.copy()
 nail=Image.open(f'{U}/90c1111e-image.png').convert('RGB').crop(tuple(CROP))
-top=205; ph=FH-top
+top=60; ph=FH-top
 s=max(FW/nail.width,ph/nail.height); n=nail.resize((round(nail.width*s),round(nail.height*s)),Image.LANCZOS)
 ox=(n.width-FW)//2; n=n.crop((ox,0,ox+FW,ph)); new.paste(n,(0,top))
 d=ImageDraw.Draw(new,'RGBA')
-for x in (333,667): d.line([(x,top),(x,FH)],fill=(255,255,255,90),width=2)
-for y in (top+ph//3,top+2*ph//3): d.line([(0,y),(FW,y)],fill=(255,255,255,90),width=2)
+for x in (310,620): d.line([(x,0),(x,FH)],fill=(255,255,255,90),width=2)
+for y in (700,1200): d.line([(0,y),(FW,y)],fill=(255,255,255,90),width=2)
 def copy_circle(cx,cy,r):
     m=Image.new('L',(FW,FH),0); ImageDraw.Draw(m).ellipse((cx-r,cy-r,cx+r,cy+r),fill=255); new.paste(orig,(0,0),m)
 for cx,cy,r in [(405,1362,38),(495,1357,38),(585,1342,40),(512,1625,92),(882,1582,58)]: copy_circle(cx,cy,r)
@@ -29,7 +29,7 @@ Mi=cv2.getPerspectiveTransform(dstf,src); back=cv2.warpPerspective(nf,Mi,(bg.sha
 mask=np.zeros((FH,FW),np.uint8); r=90
 cv2.rectangle(mask,(r,0),(FW-r,FH),255,-1); cv2.rectangle(mask,(0,r),(FW,FH-r),255,-1)
 for cx,cy in [(r,r),(FW-r,r),(r,FH-r),(FW-r,FH-r)]: cv2.circle(mask,(cx,cy),r,255,-1)
-mask[:top-5,:]=0
+poly=np.zeros((FH,FW),np.uint8); cv2.fillPoly(poly,[np.array([[0,232],[934,64],[934,FH],[0,FH]])],255); mask=cv2.bitwise_and(mask,poly)
 mw=cv2.warpPerspective(mask,Mi,(bg.shape[1],bg.shape[0])); mw=cv2.GaussianBlur(mw,(3,3),0).astype(float)[...,None]/255
 out=(back*mw+bg*(1-mw)).astype(np.uint8)
 cv2.imwrite(f'{R}/karusel_dodatky/setup_screen.jpg',out,[cv2.IMWRITE_JPEG_QUALITY,95])
