@@ -1,7 +1,7 @@
 import sys
 S,R=sys.argv[1:3]
 src=open(f'{S}/vl/apps.py').read(); exec(src.split('\n# ---------- 1 cover ----------\n')[0])
-ph=Image.open(f'{OUT}/setup_clean.jpg').convert('RGB'); s=W/ph.width; ph=ph.resize((W,round(ph.height*s)),Image.LANCZOS)
+ph=Image.open(f'{OUT}/setup_screen.jpg').convert('RGB'); s=W/ph.width; ph=ph.resize((W,round(ph.height*s)),Image.LANCZOS)
 oy=40; c=ph.crop((0,oy,W,oy+H))
 L=Image.new('RGBA',(W,H),(0,0,0,0)); d=ImageDraw.Draw(L)
 y=228
