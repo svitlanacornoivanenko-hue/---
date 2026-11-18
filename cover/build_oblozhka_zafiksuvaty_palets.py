@@ -10,9 +10,11 @@ L=Image.new('RGBA',(W2,H2),(0,0,0,0)); d=ImageDraw.Draw(L)
 def center(t,f,y,fill,sp=0):
     tw=sum(d.textlength(ch,font=f) for ch in t)+sp*(len(t)-1); x=(W2-tw)/2
     for ch in t: d.text((x,y),ch,font=f,fill=fill); x+=d.textlength(ch,font=f)+sp
-center('як зафіксувати',P(76),226,LPINK)
-center('ПАЛЕЦЬ',M(62,800),326,WHITE,6)
-center('В ОДНОМУ ПОЛОЖЕННІ',M(34,700),402,WHITE,5)
+fa=P(58); fb=P(104); t1='як '; t2='зафіксувати'
+tw=d.textlength(t1,font=fa)+d.textlength(t2,font=fb); x=(W2-tw)/2; base=318
+d.text((x,base),t1,font=fa,fill=LPINK,anchor='ls'); d.text((x+d.textlength(t1,font=fa),base),t2,font=fb,fill=LPINK,anchor='ls')
+center('ПАЛЕЦЬ',M(58,800),336,WHITE,6)
+center('В ОДНОМУ ПОЛОЖЕННІ',M(32,700),406,WHITE,5)
 sh=L.split()[3].filter(ImageFilter.GaussianBlur(10)).point(lambda v:int(v*0.6))
 c=Image.composite(Image.new('RGB',(W2,H2),(0,0,0)),c,sh); c.paste(L,(0,0),L)
 c.save(f'{R}/cover/oblozhka_zafiksuvaty_palets.jpg',quality=95)
