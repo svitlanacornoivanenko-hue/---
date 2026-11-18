@@ -1,7 +1,7 @@
 import sys, os, cv2, numpy as np
 from PIL import Image, ImageDraw, ImageFont, ImageFilter
 R,U,OUTP,CROP=sys.argv[1],sys.argv[2],sys.argv[3],[int(v) for v in sys.argv[4].split(',')]
-bg=cv2.imread(f'{R}/karusel_dodatky/setup_clean.jpg')
+bg=cv2.imread(f'{R}/karusel_dodatky/setup_clean_white.jpg')
 FW,FH=1000,1800
 src=np.float32([[584,962],[1000,926],[1308,1592],[840,1700]]); dstf=np.float32([[0,0],[FW,0],[FW,FH],[0,FH]])
 M=cv2.getPerspectiveTransform(src,dstf); flat=cv2.cvtColor(cv2.warpPerspective(bg,M,(FW,FH)),cv2.COLOR_BGR2RGB)
