@@ -10,8 +10,8 @@ _R=REG; REG=F(40,400)
 im,y=tx(im,y0+6,'','який дуже допомагає мені в монтажі майстер-класів','🎬',cx=540,mw=860,align='c',shade=0); REG=_R
 im.save(f'{OUT}/1.jpg',quality=94)
 bgi=fit(f'{U}/099fb45c-image.jpg').filter(ImageFilter.GaussianBlur(45)); bgi=Image.blend(bgi,Image.new('RGB',(W,H),(40,30,32)),0.35)
-_B=BOLD; BOLD=F(64,700)
-im,y0=tx(bgi,520,'Палець «стрибає» в кадрі?','',cx=540,mw=660,align='c',shade=0); BOLD=_B
+_B=BOLD; BOLD=F(58,700)
+im,y0=tx(bgi,330,'Палець «стрибає» в кадрі?','',cx=540,mw=980,align='c',shade=0); BOLD=_B
 _R=REG; REG=F(44,400)
 im,y=tx(im,y0+20,'','Показую, як зафіксувати його *в одному положенні* — у новому рілс','👇',cx=540,mw=640,align='c',shade=0); REG=_R
 im.save(f'{OUT}/2.jpg',quality=94)
