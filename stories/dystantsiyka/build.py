@@ -12,7 +12,7 @@ im.save(f'{OUT}/2.jpg',quality=94)
 # 4 bridge to apps post
 cov=Image.open(f'{R}/karusel_dodatky/01.jpg').convert('RGB')
 b4=fit(f'{R}/karusel_dodatky/01.jpg').filter(ImageFilter.GaussianBlur(40)); b4=Image.blend(b4,Image.new('RGB',(W,H),(30,24,24)),0.4)
-im,y=ctext(b4,260,'А поки я на тренуванні —','загляньте в мій новий допис: зібрала *топ-5 додатків*, у яких створюю контент','👇',shade=0,mw=920)
+im,y=ctext(b4,260,'Руки накачала — тепер можна й за контент','Нагадую: у новому дописі зібрала *топ-5 додатків*, у яких я знімаю й монтую. Зазирайте','👇',shade=0,mw=920)
 pw=560; ph=int(pw*1350/1080); px=(W-pw)//2; py=y+60
 sh=Image.new('L',(W,H),0); ImageDraw.Draw(sh).rounded_rectangle((px,py+14,px+pw,py+ph+14),radius=30,fill=140); sh=sh.filter(ImageFilter.GaussianBlur(24))
 im=Image.composite(Image.new('RGB',(W,H),(0,0,0)),im,sh)
