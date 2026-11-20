@@ -8,4 +8,4 @@ def ov(name,y,shade=130,scale=0.6):
         g=Image.new('L',(W,H),0); x0=(W-st.width)//2; ImageDraw.Draw(g).rounded_rectangle((x0-60,y-40,x0+st.width+60,y+st.height+40),radius=100,fill=shade); g=g.filter(ImageFilter.GaussianBlur(45))
         d=Image.new('RGBA',(W,H),(20,15,14,255)); d.putalpha(g); o.alpha_composite(d)
     o.alpha_composite(st,((W-st.width)//2,y)); o.save(f'{S}/st/ov_{name}.png')
-ov('a',1340); ov('b',290); ov('c',1490)
+ov('a',1300,shade=40); ov('b',120,shade=60); ov('c',1490)
