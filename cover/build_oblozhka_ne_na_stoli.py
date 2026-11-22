@@ -9,8 +9,8 @@ L=Image.new('RGBA',(W2,H2),(0,0,0,0)); d=ImageDraw.Draw(L)
 def center(t,f,y,fill,sp=0):
     tw=sum(d.textlength(ch,font=f) for ch in t)+sp*(len(t)-1); x=(W2-tw)/2
     for ch in t: d.text((x,y),ch,font=f,fill=fill); x+=d.textlength(ch,font=f)+sp
-center('Знімаєш на столі?',P(74),236,LPINK)
-center('Є ВАРІАНТ КРАЩЕ',M(46,800),332,WHITE,6)
+center('Знімаєш на столі?',P(84),150,LPINK)
+center('Є ВАРІАНТ КРАЩЕ',M(54,800),262,WHITE,6)
 sh=L.split()[3].filter(ImageFilter.GaussianBlur(10)).point(lambda v:int(v*0.6))
 c=Image.composite(Image.new('RGB',(W2,H2),(0,0,0)),c,sh); c.paste(L,(0,0),L)
 c.save(f'{R}/cover/oblozhka_ne_na_stoli.jpg',quality=95)
