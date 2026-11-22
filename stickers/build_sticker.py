@@ -31,6 +31,6 @@ for pi,(b,f) in enumerate(parts):
     y+=8*SC
 if emo:
     e=Image.new('RGBA',(220,220),(0,0,0,0)); ImageDraw.Draw(e).text((10,10),emo,font=E,embedded_color=True); e=e.crop(e.getbbox()); h=48*SC; e=e.resize((int(e.width*h/e.height),h),Image.LANCZOS); L.alpha_composite(e,(int(last[0]),int(last[1]+2*SC)))
-a=L.split()[3]; sh=a.filter(ImageFilter.GaussianBlur(9*SC)).point(lambda v:int(v*0.55))
+a=L.split()[3]; sh=a.filter(ImageFilter.GaussianBlur(9*SC)).point(lambda v:0 if os.environ.get('NOSH') else int(v*0.55))
 o=Image.new('RGBA',(W,H),(0,0,0,0)); s=Image.new('RGBA',(W,H),(0,0,0,255)); s.putalpha(sh); o=Image.alpha_composite(o,s); o=Image.alpha_composite(o,L)
 bb=o.getbbox(); o=o.crop((bb[0]-10,bb[1]-10,bb[2]+10,bb[3]+10)); o.save(out); print(o.size)
