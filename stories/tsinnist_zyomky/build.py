@@ -5,8 +5,30 @@ from PIL import ImageEnhance
 OUT=f'{R}/stories/tsinnist_zyomky'
 def save(im,n): im.save(f'{OUT}/{n}.jpg',quality=94)
 im,_=ctext(Image.open(f'{S}/st/me.png').convert('RGB'),150,'Думаєш, зйомка потрібна лише для *співпраць з брендами*?','Насправді — ні!',None,shade=130,bsz=50,mw=960); save(im,1)
-bg=fit(f'{U}/0036fad9-image.jpg').filter(ImageFilter.GaussianBlur(40)); bg=Image.blend(bg,Image.new('RGB',(W,H),(40,30,32)),0.3)
-im,_=ctext(bg,620,'Зйомка потрібна вже тоді,','коли ти плануєш показувати свої роботи в соцмережах. Адже клієнтка обирає майстра *очима*','👀',shade=0); save(im,2)
+def cc(p,w,h,fy=0.5):
+    im=Image.open(p).convert('RGB'); sc=max(w/im.width,h/im.height); im=im.resize((round(im.width*sc),round(im.height*sc)),Image.LANCZOS)
+    x=(im.width-w)//2; y=int((im.height-h)*fy); return im.crop((x,y,x+w,y+h))
+c=Image.new('RGB',(W,H),(255,255,255)); DK=(40,32,32)
+_B,_R=BOLD,REG; BOLD=F(52,700); REG=F(40,400)
+c,y=tx(c,170,'Зйомка потрібна вже тоді,','',cx=540,mw=960,align='c',shade=0)
+c,y=tx(c,y+4,'','коли ти показуєш свої роботи в соцмережах',None,cx=540,mw=900,align='c',shade=0)
+BOLD,REG=_B,_R
+# recolor text dark: redraw on white needs dark text -> simpler: draw manually
+c=Image.new('RGB',(W,H),(255,255,255)); d=ImageDraw.Draw(c)
+def line(y,t,f,col):
+    T=toks(t); sp=d.textlength(' ',font=f); lw=sum(d.textlength(w,font=f) for w,_ in T)+sp*(len(T)-1); x=(W-lw)/2
+    for w,p in T: d.text((x,y),w,font=f,fill=PINK if p else col); x+=d.textlength(w,font=f)+sp
+line(175,'Зйомка потрібна вже тоді,',F(52,700),DK)
+line(250,'коли ти показуєш роботи в *соцмережах*',F(40,400),(110,100,100))
+line(345,'Як думаєш, за яким фото',F(46,700),DK)
+line(410,'клієнтка *швидше запишеться*?',F(46,700),DK)
+e=emoji('🤔',52); c.paste(e,(int(W/2+d.textlength('клієнтка швидше запишеться?',font=F(46,700))/2+12),408),e)
+gw,gh,gap=470,560,20; x0=(W-2*gw-gap)//2; y0=520
+pairs=[('5b8bac7a',0.55,'a9a640c0',0.45),('5f9c00cb',0.3,'0036fad9',0.45)]
+for r,(l,lf,rr,rf) in enumerate(pairs):
+    yy=y0+r*(gh+gap)
+    c.paste(cc(f'{U}/{l}-image.jpg',gw,gh,lf),(x0,yy)); c.paste(cc(f'{U}/{rr}-image.jpg',gw,gh,rf),(x0+gw+gap,yy))
+im=c; save(im,2)
 im,_=ctext(fit(f'{U}/a9a640c0-image.jpg'),1380,'Продаючі кадри приводять клієнтів','Красиве фото — це перше враження про твою роботу ще *до запису*',None,shade=130); save(im,3)
 im,_=ctext(fit(f'{U}/10b2af08-image.jpg'),1420,'А відео передає *професіоналізм*','У ньому видно твою техніку, акуратність і процес — і довіри одразу більше',None,shade=120); save(im,4)
 im,_=ctext(fit(f'{U}/2c7aaee4-image.jpg'),200,'Мені зйомка й соцмережі допомогли','набрати клієнтську базу буквально *за 2 місяці* після декрету','🤍',shade=140); save(im,5)
