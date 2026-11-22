@@ -24,7 +24,7 @@ gw,gh,gap=470,600,20; x0=(W-2*gw-gap)//2
 c.paste(cc(f'{U}/5b8bac7a-image.jpg',gw,gh,0.55),(x0,340)); c.paste(cc(f'{U}/a9a640c0-image.jpg',gw,gh,0.45),(x0+gw+gap,340))
 q=F(42,400); line(975,'Як думаєш, за яким фото',q,DK); line(1035,'клієнтка *швидше запишеться*?',q,DK)
 e=emoji('🤔',46); c.paste(e,(int(W/2+d.textlength('клієнтка швидше запишеться?',font=q)/2+12),1036),e)
-c.paste(cc(f'{U}/5f9c00cb-image.jpg',gw,gh,0.3),(x0,1110)); c.paste(cc(f'{U}/5daf3d0c-image.jpg',gw,gh,0.5),(x0+gw+gap,1110))
+c.paste(cc(f'{U}/5f9c00cb-image.jpg',gw,gh,0.3),(x0,1110)); c.paste(cc(f'{U}/4f7ac1a4-image.jpg',gw,gh,0.45),(x0+gw+gap,1110))
 im=c; save(im,2)
 im,_=ctext(fit(f'{U}/a9a640c0-image.jpg'),1380,'Продаючі кадри приводять клієнтів','Красиве фото — це перше враження про твою роботу ще *до запису*',None,shade=130); save(im,3)
 im,_=ctext(fit(f'{U}/10b2af08-image.jpg'),1420,'А відео передає *професіоналізм*','У ньому видно твою техніку, акуратність і процес — і довіри одразу більше',None,shade=120); save(im,4)
