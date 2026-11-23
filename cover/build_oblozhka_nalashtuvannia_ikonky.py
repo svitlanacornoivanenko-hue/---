@@ -23,28 +23,28 @@ def camera_icon(sz):
     d.ellipse((x0+bw*0.80,y0+bh*0.17,x0+bw*0.80+S2*0.045,y0+bh*0.17+S2*0.045),fill=(150,150,156,255))
     o=bg.resize((sz,sz),Image.LANCZOS); o.putalpha(squircle(sz)); return o
 im=Image.open(IN).convert('RGBA'); W2,H2=im.size
-isz=150; gap=230; cy=1410
+isz=120; gap=180; cy=1450
 xL=W2/2-gap/2-isz; xR=W2/2+gap/2
 # frosted card
-cx0,cx1,cy0,cy1=int(xL-70),int(xR+isz+70),cy-40,cy+isz+100
-sh=Image.new('L',(W2,H2),0); ImageDraw.Draw(sh).rounded_rectangle((cx0,cy0+10,cx1,cy1+10),radius=56,fill=90); sh=sh.filter(ImageFilter.GaussianBlur(22))
+cx0,cx1,cy0,cy1=int(xL-55),int(xR+isz+55),cy-32,cy+isz+80
+sh=Image.new('L',(W2,H2),0); ImageDraw.Draw(sh).rounded_rectangle((cx0,cy0+10,cx1,cy1+10),radius=46,fill=90); sh=sh.filter(ImageFilter.GaussianBlur(22))
 im=Image.composite(Image.new('RGBA',(W2,H2),(0,0,0,255)),im,sh)
-blur=im.filter(ImageFilter.GaussianBlur(25)); cm=Image.new('L',(W2,H2),0); ImageDraw.Draw(cm).rounded_rectangle((cx0,cy0,cx1,cy1),radius=56,fill=255)
+blur=im.filter(ImageFilter.GaussianBlur(25)); cm=Image.new('L',(W2,H2),0); ImageDraw.Draw(cm).rounded_rectangle((cx0,cy0,cx1,cy1),radius=46,fill=255)
 im=Image.composite(blur,im,cm)
-card=Image.new('RGBA',(W2,H2),(0,0,0,0)); ImageDraw.Draw(card).rounded_rectangle((cx0,cy0,cx1,cy1),radius=56,fill=(255,255,255,205)); im.alpha_composite(card)
+card=Image.new('RGBA',(W2,H2),(0,0,0,0)); ImageDraw.Draw(card).rounded_rectangle((cx0,cy0,cx1,cy1),radius=46,fill=(255,255,255,205)); im.alpha_composite(card)
 im.alpha_composite(settings_icon(isz),(int(xL),cy)); im.alpha_composite(camera_icon(isz),(int(xR),cy))
-d=ImageDraw.Draw(im); f=M(34,500)
+d=ImageDraw.Draw(im); f=M(28,500)
 for x,t in [(xL,'Параметри'),(xR,'Камера')]:
-    tw=d.textlength(t,font=f); d.text((x+isz/2-tw/2,cy+isz+16),t,font=f,fill=(28,28,30))
+    tw=d.textlength(t,font=f); d.text((x+isz/2-tw/2,cy+isz+12),t,font=f,fill=(28,28,30))
 # arrow (pink, slightly curved)
 A=Image.new('RGBA',(W2*SC,H2*SC),(0,0,0,0)); da=ImageDraw.Draw(A); P=(236,110,170,255)
-x0,x1=(xL+isz+28)*SC,(xR-28)*SC; ym=(cy+isz/2)*SC
-pts=[(x0+(x1-x0)*t, ym-np.sin(np.pi*t)*22*SC) for t in np.linspace(0,1,40)]
-da.line(pts,fill=P,width=7*SC,joint='curve')
+x0,x1=(xL+isz+22)*SC,(xR-22)*SC; ym=(cy+isz/2)*SC
+pts=[(x0+(x1-x0)*t, ym-np.sin(np.pi*t)*16*SC) for t in np.linspace(0,1,40)]
+da.line(pts,fill=P,width=6*SC,joint='curve')
 ex,ey=pts[-1]; px,py=pts[-4]; ang=np.arctan2(ey-py,ex-px)
 for s in (+1,-1):
-    a2=ang+np.pi-s*0.55; da.line([(ex,ey),(ex+np.cos(a2)*30*SC,ey+np.sin(a2)*30*SC)],fill=P,width=7*SC)
-    da.ellipse((ex+np.cos(a2)*30*SC-3.5*SC,ey+np.sin(a2)*30*SC-3.5*SC,ex+np.cos(a2)*30*SC+3.5*SC,ey+np.sin(a2)*30*SC+3.5*SC),fill=P)
+    a2=ang+np.pi-s*0.55; da.line([(ex,ey),(ex+np.cos(a2)*24*SC,ey+np.sin(a2)*24*SC)],fill=P,width=6*SC)
+    da.ellipse((ex+np.cos(a2)*24*SC-3.5*SC,ey+np.sin(a2)*24*SC-3.5*SC,ex+np.cos(a2)*24*SC+3.5*SC,ey+np.sin(a2)*24*SC+3.5*SC),fill=P)
 da.ellipse((pts[0][0]-3.5*SC,pts[0][1]-3.5*SC,pts[0][0]+3.5*SC,pts[0][1]+3.5*SC),fill=P); da.ellipse((ex-3.5*SC,ey-3.5*SC,ex+3.5*SC,ey+3.5*SC),fill=P)
 im.alpha_composite(A.resize((W2,H2),Image.LANCZOS))
 im.convert('RGB').save(f'{R}/cover/oblozhka_nalashtuvannia.jpg',quality=95)
