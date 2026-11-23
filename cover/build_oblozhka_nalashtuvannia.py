@@ -14,15 +14,20 @@ gain=br.mean()/br*np.array([0.975,1.0,1.045]); a=np.clip(a*gain,0,255)
 c=Image.fromarray(a.astype(np.uint8)); print('gain',gain)
 g=Image.new('L',(1,H2)); [g.putpixel((0,y),int(200*max(0,1-y/820)**1.0)) for y in range(H2)]
 c=Image.composite(Image.new('RGB',(W2,H2),(14,15,18)),c,g.resize((W2,H2)))
+import os
+lp=os.path.join(os.path.dirname(os.path.abspath(__file__)),'oblozhka_nalashtuvannia_lut.npy')
+if os.path.exists(lp):
+    lut=np.load(lp); a=np.asarray(c); c=Image.fromarray(np.stack([lut[i][a[...,i]] for i in range(3)],-1).astype(np.uint8))
+PINK=(244,140,190)
 L=Image.new('RGBA',(W2,H2),(0,0,0,0)); d=ImageDraw.Draw(L)
 def center(t,f,y,fill,sp=0):
     tw=sum(d.textlength(ch,font=f) for ch in t)+sp*(len(t)-1); x=(W2-tw)/2
     for ch in t: d.text((x,y),ch,font=f,fill=fill); x+=d.textlength(ch,font=f)+sp
     return tw
-center('Налаштування',P(116),215,LPINK)
+center('Налаштування',P(116),215,PINK)
 center('КАМЕРИ',M(70,800),372,WHITE,12)
 tw=center('для найвищої якості зйомки',M(36,500),484,WHITE,3)
 d.line(((W2-440)/2,470,(W2+440)/2,470),fill=(255,255,255,200),width=2)
-sh=L.split()[3].filter(ImageFilter.GaussianBlur(10)).point(lambda v:int(v*0.6))
+sh=L.split()[3].filter(ImageFilter.GaussianBlur(10)).point(lambda v:int(v*0.7))
 c=Image.composite(Image.new('RGB',(W2,H2),(0,0,0)),c,sh); c.paste(L,(0,0),L)
 c.save(f'{R}/cover/{OUTN}',quality=95)
