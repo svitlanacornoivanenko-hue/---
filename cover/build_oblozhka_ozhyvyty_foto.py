@@ -10,10 +10,10 @@ L=Image.new('RGBA',(W2,H2),(0,0,0,0)); d=ImageDraw.Draw(L)
 def center(t,f,y,fill,sp=0):
     tw=sum(d.textlength(ch,font=f) for ch in t)+sp*(len(t)-1); x=(W2-tw)/2
     for ch in t: d.text((x,y),ch,font=f,fill=fill); x+=d.textlength(ch,font=f)+sp
-center('Оживи фото',P(116),1330,PINK)
-center('В CAPCUT',M(68,800),1487,WHITE,14)
-d.line(((W2-420)/2,1585,(W2+420)/2,1585),fill=(255,255,255,200),width=2)
-center('за 20 секунд',M(36,500),1601,WHITE,3)
+center('Як оживити фото',P(100),1340,PINK)
+center('ЗА ДОПОМОГОЮ МОНТАЖУ',M(48,800),1480,WHITE,7)
+d.line(((W2-420)/2,1563,(W2+420)/2,1563),fill=(255,255,255,200),width=2)
+center('показую в CapCut',M(34,500),1579,WHITE,3)
 sh=L.split()[3].filter(ImageFilter.GaussianBlur(10)).point(lambda v:int(v*0.7))
 c=Image.composite(Image.new('RGB',(W2,H2),(0,0,0)),c,sh); c.paste(L,(0,0),L)
 c.save(f'{R}/cover/oblozhka_ozhyvyty_foto.jpg',quality=95)
