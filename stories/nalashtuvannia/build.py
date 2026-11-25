@@ -14,9 +14,9 @@ def block(im,y,lines,fill):
     return im
 # 1
 BOLD=F(52,700); REG=F(42,400)
-im=block(fit(f'{U}/44955f0d-image.jpg'),1400,[(1,'Не обов’язково мати',None),(1,'*останню модель iPhone*,',None),(0,'щоб мати якісну картинку','📱')],140); sv(im,1)
+im=block(fit(f'{U}/44955f0d-image.jpg'),1390,[(1,'Багато майстрів думає,',None),(0,'що для якісної картинки потрібен',None),(0,'*iPhone останньої версії*','🤔')],140); sv(im,1)
 # 2
-im=block(fit(f'{U}/6aa01f98-image.jpg'),230,[(1,'Щоб картинка була якісною,',None),(1,'спочатку *перевір налаштування*',None),(0,'камери на своєму телефоні','⚙️')],165); sv(im,2)
+im=block(fit(f'{U}/6aa01f98-image.jpg'),210,[(1,'Хоча свої ролики я починала',None),(1,'з *iPhone 11*',None),(0,'І що можу сказати?',None),(0,'Навіть з ним можуть вийти круті кадри,',None),(0,'якщо знати правильні',None),(0,'налаштування камери','✨')],165); sv(im,2)
 # 3 blurred cover + card
 cv=Image.open(f'{R}/cover/oblozhka_nalashtuvannia.jpg').convert('RGB')
 bg=cv.filter(ImageFilter.GaussianBlur(45)); bg=Image.blend(bg,Image.new('RGB',(1080,1920),(28,22,24)),0.55)
@@ -27,5 +27,5 @@ m=Image.new('L',(w,h),0); ImageDraw.Draw(m).rounded_rectangle((0,0,w-1,h-1),radi
 BOLD=F(50,700); REG=F(42,400)
 im,y=tx(bg,250,'А які саме *налаштування*','',cx=540,mw=1000,align='c',shade=0)
 im,y=tx(im,y-8,'мають бути —','',cx=540,mw=1000,align='c',shade=0)
-im,y=tx(im,y+6,'','дивись у новому рілс','👇',cx=540,mw=1000,align='c',shade=0)
+im,y=tx(im,y+6,'','показую в своєму рілс','👇',cx=540,mw=1000,align='c',shade=0)
 sv(im,3); print('ok')
