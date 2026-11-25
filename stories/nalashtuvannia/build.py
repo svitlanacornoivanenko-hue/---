@@ -14,12 +14,12 @@ def block(im,y,lines,fill):
     return im
 # 1
 BOLD=F(58,700); REG=F(47,400)
-im=block(fit(f'{U}/6603af5e-image.jpg'),1340,[(1,'Багато майстрів думає,',None),(0,'що для якісної картинки потрібен',None),(0,'*iPhone останньої версії*','🤔')],190); sv(im,1)
+im=block(fit(f'{U}/6603af5e-image.jpg'),1340,[(1,'Багато майстрів думає,',None),(0,'що для якісної картинки потрібен',None),(0,'*iPhone останньої версії*','🤔')],105); sv(im,1)
 # 2
 im=block(fit(f'{U}/6aa01f98-image.jpg'),210,[(1,'Хоча свої ролики я починала',None),(1,'з *iPhone 11*',None),(0,'І що можу сказати?',None),(0,'Навіть з ним можуть вийти круті кадри,',None),(0,'якщо знати правильні',None),(0,'налаштування камери','✨')],165); sv(im,2)
 # 3 blurred cover + card
 cv=Image.open(f'{R}/cover/oblozhka_nalashtuvannia.jpg').convert('RGB')
-bg=cv.filter(ImageFilter.GaussianBlur(45)); bg=Image.blend(bg,Image.new('RGB',(1080,1920),(28,22,24)),0.55)
+bg=cv.filter(ImageFilter.GaussianBlur(45)); bg=Image.blend(bg,Image.new('RGB',(1080,1920),(28,22,24)),0.38)
 w=560; h=int(cv.height*w/cv.width); card=cv.resize((w,h),Image.LANCZOS); x0=(1080-w)//2; y0=640
 sh=Image.new('L',(1080,1920),0); ImageDraw.Draw(sh).rounded_rectangle((x0,y0+16,x0+w,y0+h+16),radius=40,fill=150); sh=sh.filter(ImageFilter.GaussianBlur(30))
 bg=Image.composite(Image.new('RGB',(1080,1920),(0,0,0)),bg,sh)
