@@ -11,6 +11,17 @@ seg=vision.ImageSegmenter.create_from_options(vision.ImageSegmenterOptions(base_
 icon=Image.open(f'{R}/styl/obladnannia/ic_capcut.png').convert('RGBA')
 ib=icon.getbbox(); icon=icon.crop(ib)
 PINK=(244,140,190)
+sys.path.insert(0,__import__('os').path.dirname(__import__('os').path.abspath(__file__)))
+import ovtext, os
+SUBS=[(0.0,2.3,'Хочеш так само|додати себе у відео?',None),(2.3,4.13,'Показую, як це зробити в CapCut',None),
+(4.13,6.9,'Відкриваю CapCut|і обираю основне відео',None),(6.9,8.4,'Далі вкладка «Накладання»',None),(8.4,10.2,'і обираю відео,|на якому я говорю',None),
+(10.2,12.6,'Натискаю «Вилучити фон»',None),(12.6,14.2,'Автоматичне вилучення',None),(14.2,16.5,'Тепер двома пальцями|зменшую свій силует',None),
+(16.5,18.84,'і переношу його на лівий край',None),(18.84,20.1,'І все, готово!',None),(20.1,99,'Обов’язково зберігай,|щоб не загубити','📌')]
+subov=[]
+tmp=os.path.join(os.path.dirname(OUT),'_subs'); os.makedirs(tmp,exist_ok=True)
+for i,(a,b,txt,e) in enumerate(SUBS):
+    parts=txt.split('|'); y=(1480 if a<CUT else 990)-(50 if len(parts)>1 else 0)
+    fn=f'{tmp}/s{i}.png'; ovtext.render([(0,pt,e if k==len(parts)-1 else None) for k,pt in enumerate(parts)],y,fn,shade=70,rsz=38); subov.append((a,b,Image.open(fn).convert('RGBA')))
 rings=[(5.25,5.95,(672,1768)),(5.95,6.7,(584,1760)),(10.55,11.55,(628,1760))]
 toast=(13.45,14.7,(118,1072,782,1128))
 def ease(x): return 1-(1-x)**3
@@ -30,7 +41,7 @@ while True:
         mm=cv2.GaussianBlur(m,(0,0),3)
         if t<INSET_END:
             x0,y0,x1,y1=INSET; box=np.zeros_like(mm); box[y0:y1,x0:x1]=1; mm=np.maximum(mm,box)
-        bl=cv2.GaussianBlur(fr,(0,0),22)
+        bl=cv2.GaussianBlur(fr,(0,0),9)
         fr=(fr*mm[...,None]+bl*(1-mm[...,None])).astype(np.uint8)
     im=Image.fromarray(fr).convert('RGBA')
     # CapCut sticker
@@ -43,6 +54,8 @@ while True:
         from PIL import ImageFilter
         im.alpha_composite(sh.filter(ImageFilter.GaussianBlur(10)),(920-sz//2,346-ic.height//2))
         im.alpha_composite(ic,(920-sz//2,330-ic.height//2))
+    for a,b,so in subov:
+        if a<=t<b: im.alpha_composite(so)
     ov=Image.new('RGBA',(W*2,H*2),(0,0,0,0)); d=ImageDraw.Draw(ov); drew=False
     for a0,a1,(cx,cy) in rings:
         if a0<=t<a1:
