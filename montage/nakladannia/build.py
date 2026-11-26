@@ -45,9 +45,9 @@ while True:
         fr=(fr*mm[...,None]+bl*(1-mm[...,None])).astype(np.uint8)
     im=Image.fromarray(fr).convert('RGBA')
     # CapCut sticker
-    if 3.4<=t<6.35:
+    if 3.4<=t<CUT:
         k=t-3.4; s=0.55+0.53*ease(min(1,k/0.22)) if k<0.22 else (1.08-0.08*min(1,(k-0.22)/0.12))
-        a=1.0 if t<6.05 else max(0,1-(t-6.05)/0.3)
+        a=1.0 if t<3.95 else max(0,1-(t-3.95)/0.18)
         sz=int(210*s); ic=icon.resize((sz,int(icon.height*sz/icon.width)),Image.LANCZOS)
         if a<1: ic.putalpha(ic.getchannel('A').point(lambda v:int(v*a)))
         sh=Image.new('RGBA',ic.size,(0,0,0,0)); sh.putalpha(ic.getchannel('A').point(lambda v:int(v*0.35)))
