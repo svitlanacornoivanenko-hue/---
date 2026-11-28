@@ -14,9 +14,9 @@ def block(im,y,lines,fill):
     return im
 BOLD=F(58,700); REG=F(47,400)
 # 1
-im=block(fit(f'{U}/10b2af08-image.jpg'),1470,[(1,'Що робить фото чи відео',None),(1,'манікюру *дорогим*?',None),(0,'Не лише якісно виконана робота,',None),(0,'а й правильне розташування світла','✨')],100); sv(im,1)
+im=block(fit(f'{OUT}/src_1.jpg'),165,[(1,'Що робить фото чи відео',None),(1,'манікюру *дорогим*?',None),(0,'Не лише якісно виконана робота,',None),(0,'а й правильне розташування світла','✨')],100); sv(im,1)
 # 2
-im=block(fit(f'{U}/8d6f55f4-image.jpg'),210,[(1,'Від того, *як стоїть світло*,',None),(0,'залежить блик, колір',None),(0,'і чіткість кадру','💡')],100); sv(im,2)
+im=block(fit(f'{U}/8d6f55f4-image.jpg'),1460,[(1,'Від того, *як стоїть світло*,',None),(0,'залежить блик, колір',None),(0,'і чіткість кадру','💡')],100); sv(im,2)
 # 3
 cv=Image.open(f'{R}/cover/oblozhka_dvi_skhemy.jpg').convert('RGB')
 bg=cv.filter(ImageFilter.GaussianBlur(45)); bg=Image.blend(bg,Image.new('RGB',(1080,1920),(28,22,24)),0.38)
